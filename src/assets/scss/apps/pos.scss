@@ -1,0 +1,146 @@
+$chat-header-height: 75px;
+$chat-footer-height: 75px;
+
+.pos {
+  height: 100vh;
+
+  .pos-container-prod {
+    .pos-header {
+      i {
+        font-size: 20px;
+        color: $brand-primary;
+      }
+    }
+    .product-tabs {
+      .product-tab-list {
+        width: calc(100% + 15px);
+        height: calc(100vh - 285px);
+        overflow-y: scroll;
+        padding-left: 10px;
+        .product-tab-item {
+          cursor: pointer;
+          margin-bottom: 15px;
+          .item-header {
+            padding: 10px;
+            background-color: $border-color;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border: 1px solid $border-color;
+
+            nz-avatar {
+              font-size: 30px;
+              background-color: $white;
+              color: $border-color;
+            }
+          }
+          .item-body {
+            padding: 10px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background-color: $white;
+            border: 1px solid $border-color;
+          }
+        }
+      }
+    }
+  }
+  .pos-container-cart {
+    background-color: $border-color;
+
+    .table-detail {
+      i {
+        font-size: 20px;
+        color: $brand-primary;
+      }
+      h4 {
+        color: $gray-dark;
+      }
+    }
+    .client-containter {
+      nz-select {
+        width: calc(100% - 63px);
+      }
+      .btn-client {
+        margin-left: 15px;
+        width: 48px;
+      }
+      .ant-btn {
+        line-height: 3.1;
+      }
+      .ant-btn-icon-only {
+        height: 2.6rem;
+      }
+    }
+
+    .cart-header {
+      border-bottom: 1px solid $gray;
+      padding: 15px 9px 0px 9px;
+    }
+    .cart-footer{
+      width: 100%;
+      height: 140px;
+      color: $white;
+
+      .footer-detail{
+        height: 80px;
+        background-color: $white;
+      }
+
+      .btn-note{
+        background-color: $brand-secondary;
+        height: 60px;
+      }
+
+      .btn-order{
+        background-color: $brand-primary;
+        height: 60px;
+      }
+
+      .btn-title{
+        font-size: 14px;
+        margin: 0;
+        color: $white;
+      }
+
+      .btn-title-detail{
+        font-size: 10px;
+        color: $white;
+      }
+    }
+
+    .cart-item-list{
+      height: calc(100vh - 316px);
+      .cart-item {
+        width: 100%;
+        margin-top: 15px;
+        background-color: $white;
+        border-radius: 10px;
+        padding: 9px 0px;
+
+        .btn-item-cant {
+          width: 2.5rem;
+          height: 2.5rem;
+          background-color: $border-color;
+          border-radius: 5px;
+          border: 1px solid $border-color;
+        }
+
+        .container-item-note{
+          background-color: $border-color;
+          height: 2.5rem;
+          padding: 10px;
+          border-radius: 5px;
+        }
+        .btn-item-delete{
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 5px;
+          color: $brand-primary;
+          border: 1px solid $brand-primary;
+          background-color: $white;
+        }
+      }
+    }
+
+  }
+}
