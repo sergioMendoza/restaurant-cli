@@ -15,6 +15,10 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { PaymentContainerComponent } from './containers/payment-container/payment-container.component';
+import { CartItemListComponent } from './components/cart-item-list/cart-item-list.component';
+import { ProductTabListComponent } from './components/product-tab-list/product-tab-list.component';
+import { CategoryTabListComponent } from './components/category-tab-list/category-tab-list.component';
 
 
 /** Assign all ng-zorro modules to this array*/
@@ -31,7 +35,7 @@ const antdModule = [
 ];
 
 @NgModule({
-  declarations: [PanelContainerComponent],
+  declarations: [PanelContainerComponent, PaymentContainerComponent, CartItemListComponent, ProductTabListComponent, CategoryTabListComponent],
   imports: [CommonModule, PosRoutingModule, ...antdModule],
   exports: []
 })

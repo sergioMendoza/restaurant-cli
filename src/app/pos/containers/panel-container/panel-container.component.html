@@ -40,25 +40,16 @@
             {{ tab.name }}
           </ng-template>
 
-          <div class="product-tab-list" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-            <div *ngFor="let item of tab.items" nz-col class="gutter-row" [nzSpan]="6">
-              <div class="product-tab-item text-center">
-                <div class="item-header">
-                  <nz-avatar [nzSize]="70" [nzText]="getAcronym(item.name)" [nzSrc]="item.image"></nz-avatar>
-                </div>
-                <div class="item-body">
-                  <h6>{{item.name}}</h6>
-                  <span>{{item.currency}}{{item.price}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <app-product-tab-list [productList]="tab.items"></app-product-tab-list>
+
         </nz-tab>
       </nz-tabset>
     </div>
 
   </div>
+
   <div class="pos-container-cart col-lg-4">
+
     <div class="col-lg-12 p-t-15 p-b-15">
       <div class="d-md-flex align-items-md-center justify-content-between">
         <div class="media align-items-center">
@@ -72,75 +63,42 @@
         </div>
       </div>
     </div>
+
     <div class="client-containter col-lg-12">
       <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Buscar cliente" [(ngModel)]="selectedValue">
         <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
         <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
         <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
       </nz-select>
-      <button (click)="openComponent()" class="btn-client" nz-button nzType="default"><i nz-icon nzType="user-add" nzTheme="outline"></i></button>
+      <button (click)="openPaymentComponent()" class="btn-client" nz-button nzType="default"><i nz-icon
+          nzType="user-add" nzTheme="outline"></i></button>
     </div>
+
     <div class="col-lg-12">
-      <div class="row cart-header justify-content-between">
-        <div class="col-lg-6">
-          <h6>Productos</h6>
-        </div>
-        <div class="col-lg-2 text-center">
-          <h6>Cant.</h6>
-        </div>
-        <div class="col-lg-4 text-right">
-          <h6>Precio</h6>
-        </div>
-      </div>
-      <div class="cart-item-list">
-        <div class="row cart-item m-l-0 m-r-0">
-          <div class="col-lg-6">
-            <div class="media align-items-center">
-              <nz-avatar nzIcon="user" nzSrc="assets/images/others/dish.png"></nz-avatar>
-              <div class="media-body m-l-15">
-                <h6 class="m-b-0">Tallarin palo alto</h6>
-                <span class="text-gray font-size-11">S/60.00</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-2  text-center">
-            <button class="btn-item-cant">1</button>
-          </div>
-          <div class="col-lg-4  text-right">
-            <h6 class="p-t-10 p-b-10 m-b-0">S/60.00</h6>
-          </div>
-          <div class="col-lg-12">
-            <div class="row m-t-10">
-              <div class="col-lg-10">
-                <div class="container-item-note"><span>Agregar nota.</span></div>
-              </div>
-              <div class="col-lg-2 text-center">
-                <button class="btn-item-delete"><i class="far fa-trash-alt"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
+
+      <app-cart-item-list [cart]="cart" (deleteItem)="_deleteItem($event)" (addQuantity)="_addQuantity($event)"></app-cart-item-list>
+
+      <div *ngIf="false" class="cart-btn row">
+        <button nz-button class="col-lg-6 bg-secondary">
+          Para llevar todos
+        </button>
+        <button nz-button class="col-lg-6 bg-primary">
+          Enviar <br>
+          <span class="font-size-10">1 producto</span>
+        </button>
       </div>
 
-      <div class="cart-footer">
-        <div class="row">
-          <div class="footer-detail col-lg-12 p-10">
-            <div class="row text-gray">
-              <div class="col-lg-8">Descuento:</div>
-              <div class="col-lg-4 text-right">S/0</div>
-              <div class="col-lg-8">Sub Total:</div>
-              <div class="col-lg-4 text-right">S/60.00</div>
-            </div>
-          </div>
-          <div class="btn-note col-lg-6 p-t-20 text-center">
-            <h6 class="btn-title">Para llevar todos</h6>
-          </div>
-          <div class="btn-order col-lg-6 p-10 text-center">
-            <h6 class="btn-title">Enviar</h6>
-            <span class="btn-title-detail">1 producto</span>
-          </div>
-        </div>
+
+      <div *ngIf="true" class="cart-btn row">
+        <button nz-button class="col-lg-6 bg-atomic-warning">
+          Pre-Cuenta
+        </button>
+        <button nz-button class="col-lg-6 bg-primary">
+          Pagar <br>
+          <span class="font-size-10">1 producto</span>
+        </button>
       </div>
+
     </div>
   </div>
 </div>

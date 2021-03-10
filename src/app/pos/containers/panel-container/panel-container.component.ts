@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 import { CustomerFormComponent } from 'src/app/customers/components/customer-form/customer-form.component';
+import { PaymentContainerComponent } from '../payment-container/payment-container.component';
 
 
 @Component({
@@ -15,62 +16,6 @@ export class PanelContainerComponent implements OnInit {
       name: 'Categorias',
       icon: 'unordered-list',
       items: [
-        {
-          color: '',
-          image: 'assets/images/others/dish.png',
-          name: 'Tallarin palo alto',
-          price: 65,
-          currency: 'S/'
-        },
-        {
-          color: '',
-          image: 'assets/images/others/dish2.png',
-          name: 'Tallarin palo alto',
-          price: 65,
-          currency: 'S/'
-        },
-        {
-          color: '',
-          image: 'assets/images/others/dish3.png',
-          name: 'Tallarin palo alto',
-          price: 65,
-          currency: 'S/'
-        },
-        {
-          color: '',
-          image: 'assets/images/others/dish7.png',
-          name: 'Tallarin palo alto',
-          price: 65,
-          currency: 'S/'
-        },
-        {
-          color: '',
-          image: 'assets/images/others/dish.png',
-          name: 'Tallarin palo alto',
-          price: 65,
-          currency: 'S/'
-        },
-        {
-          color: '',
-          image: 'assets/images/others/dish2.png',
-          name: 'Tallarin palo alto',
-          price: 65,
-          currency: 'S/'
-        },
-        {
-          color: '',
-          image: 'assets/images/others/dish3.png',
-          name: 'Tallarin palo alto',
-          price: 65,
-          currency: 'S/'
-        },
-        {
-          color: '',
-          image: 'assets/images/others/dish7.png',
-          name: 'Tallarin palo alto',
-          price: 65,
-          currency: 'S/'
-        },
         {
           color: '',
           image: 'assets/images/others/dish.png',
@@ -113,6 +58,17 @@ export class PanelContainerComponent implements OnInit {
     }
   ];
 
+  cart=[
+    {
+      color: '',
+      image: 'assets/images/others/dish.png',
+      name: 'Tallarin palo alto',
+      quantity: 1,
+      price: '65.0',
+      currency: 'S/'
+    },
+  ];
+
   constructor(private drawerService: NzDrawerService) {}
 
   ngOnInit(): void {}
@@ -140,10 +96,10 @@ export class PanelContainerComponent implements OnInit {
   }
 
   openPaymentComponent(): void {
-    const drawerRef = this.drawerService.create<CustomerFormComponent, { value: string }, string>({
+    const drawerRef = this.drawerService.create<PaymentContainerComponent, { value: string }, string>({
       nzTitle: 'Component',
-      nzContent: CustomerFormComponent,
-      nzWidth: 425,
+      nzContent: PaymentContainerComponent,
+      nzWidth: 825,
       nzContentParams: {
         value: this.value
       }
@@ -161,8 +117,15 @@ export class PanelContainerComponent implements OnInit {
     });
   }
 
-  getAcronym(str: string) {
-    const matches = str.match(/\b(\w)/g);
-    return matches.join('').toUpperCase();
+  _addNote(event) {
+    console.log(event);
   }
+  _addQuantity(event) {
+    console.log(event);
+  }
+  _deleteItem(event) {
+    console.log(event);
+  }
+
+
 }

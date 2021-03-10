@@ -1,0 +1,13 @@
+<div class="product-tab-list" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div *ngFor="let item of productList" nz-col class="gutter-row" [nzSpan]="6">
+    <div class="product-tab-item text-center">
+      <div class="item-header">
+        <nz-avatar [nzSize]="70" [nzText]="getAcronym(item.name)" [nzSrc]="item.image"></nz-avatar>
+      </div>
+      <div class="item-body">
+        <h6>{{item.name}}</h6>
+        <span>{{item.currency}}{{item.price}}</span>
+      </div>
+    </div>
+  </div>
+</div>
