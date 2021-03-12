@@ -66,17 +66,17 @@
 
     <div class="client-containter col-lg-12">
       <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Buscar cliente" [(ngModel)]="selectedValue">
-        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+        <nz-option *ngFor="let option of clientOptionList" [nzLabel]="option.text" [nzValue]="option.value"></nz-option>
       </nz-select>
-      <button (click)="openPaymentComponent()" class="btn-client" nz-button nzType="default"><i nz-icon
-          nzType="user-add" nzTheme="outline"></i></button>
+      <button (click)="openClientComponent()" class="btn-client" nz-button nzType="default"><i nz-icon nzType="user-add"
+          nzTheme="outline"></i></button>
     </div>
 
     <div class="col-lg-12">
 
-      <app-cart-item-list [cart]="cart" (deleteItem)="_deleteItem($event)" (addQuantity)="_addQuantity($event)"></app-cart-item-list>
+      <app-cart-item-list [cart]="cart" (addNote)="openNoteComponent($event)" (deleteNote)="_deleteNote($event)" (deleteItem)="_deleteItem($event)"
+        (addQuantity)="_addQuantity($event)">
+      </app-cart-item-list>
 
       <div *ngIf="false" class="cart-btn row">
         <button nz-button class="col-lg-6 bg-secondary">
