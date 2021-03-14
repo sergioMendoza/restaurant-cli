@@ -2,39 +2,130 @@ import { SideNavInterface } from '../../interfaces/side-nav.type';
 export const ROUTES: SideNavInterface[] = [
   {
     path: '/dashboard',
-    title: 'Dashboard',
+    title: 'ESCRITORIO',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'dashboard',
     submenu: []
   },
   {
-    path: '/products',
-    title: 'Productos',
+    path: '/sells',
+    title: 'VENTAS',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'appstore',
     submenu: [
       {
-        path: '',
-        title: 'Level 1',
+        path: '/',
+        title: 'Panel cocina',
         iconType: '',
         icon: '',
         iconTheme: '',
         submenu: []
       }
+
+
     ]
   },
   {
     path: '/pos',
-    title: 'Caja',
+    title: 'CAJA',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: 'appstore',
+    icon: 'money-collect',
     submenu: [
       {
         path: '/pos/panel',
         title: 'Cobrar',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: '/box/open/close',
+        title: 'Apertura y cierre',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: '',
+        title: 'Cierre caja Z',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: '',
+        title: 'Cierres de caja',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: '',
+        title: 'Ingresos',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },{
+        path: '',
+        title: 'Egresos',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: '',
+        title: 'Nota de credito',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: '',
+        title: 'Nota de debito',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+
+    ]
+  },
+  {
+    path: '/products',
+    title: 'PRODUCTOS',
+    iconType: 'nzIcon',
+    iconTheme: 'outline',
+    icon: 'container',
+    submenu: [
+      {
+        path: '',
+        title: 'Platos y bebidas',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: '',
+        title: 'Combos',
+        iconType: '',
+        icon: '',
+        iconTheme: '',
+        submenu: []
+      },
+      {
+        path: '',
+        title: 'Insumos',
         iconType: '',
         icon: '',
         iconTheme: '',

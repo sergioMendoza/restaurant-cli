@@ -3,9 +3,9 @@
   <ul nz-menu nzMode="inline" nzTheme="default" [nzInlineCollapsed]="isFolded">
     <li nz-menu-item nz-tooltip nzTooltipPlacement="right">
     </li>
-    <ng-container *ngFor="let item of menuItems">
+    <ng-container *ngFor="let item of menuItems; let i = index">
       <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact:
-        true}"  nz-tooltip nzTooltipPlacement="right" *ngIf="item.submenu.length === 0">
+        true}" nz-tooltip nzTooltipPlacement="right" *ngIf="item.submenu.length === 0">
         <i *ngIf="item.iconType == 'nzIcon'" nz-icon [nzType]="item.icon" [theme]="item.iconTheme"></i>
         <i *ngIf="item.iconType == 'fontawesome'" class="m-r-10" [ngClass]="[item.iconTheme, item.icon]"></i>
         <span> <a [routerLink]="item.path">{{ item.title }}</a></span>
@@ -25,6 +25,7 @@
           </ng-container>
         </ul>
       </li>
+
     </ng-container>
   </ul>
   <div class="side-nav-toggle">
