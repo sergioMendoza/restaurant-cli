@@ -15,6 +15,7 @@
 
     @include screen-laptop-only {
         width: $side-nav-width-laptop;
+
     }
 
     .side-nav-menu {
@@ -96,6 +97,11 @@
       width: $side-nav-width;
       padding: 10px;
       background: $menu-dark-bg;
+
+      @include screen-laptop-only {
+        width: $side-nav-width-laptop;
+
+    }
     }
 }
 

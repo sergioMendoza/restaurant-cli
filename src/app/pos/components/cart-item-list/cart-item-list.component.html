@@ -13,7 +13,7 @@
   <div *ngFor="let item of cart; let i = index" class="row cart-item m-0 p-10 m-b-10">
     <div class="col-lg-6">
       <div class="media align-items-center">
-        <nz-avatar nzIcon="user" nzSrc="assets/images/others/dish.png"></nz-avatar>
+        <nz-avatar nzIcon="user" [nzSrc]="item.image"></nz-avatar>
         <div class="media-body m-l-15">
           <h6 class="m-b-0">{{item.name}}</h6>
           <span class="text-gray font-size-11">{{item.currency}}{{item.price}}</span>

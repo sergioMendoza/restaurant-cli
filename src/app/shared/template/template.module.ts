@@ -15,6 +15,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 
 import { HeaderComponent } from './header/header.component';
@@ -37,7 +38,8 @@ const antdModule = [
   NzInputModule,
   NzButtonModule,
   NzIconModule,
-  NzLayoutModule
+  NzLayoutModule,
+  NzMenuModule
 ];
 
 @NgModule({

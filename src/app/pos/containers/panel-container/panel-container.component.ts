@@ -185,25 +185,16 @@ export class PanelContainerComponent implements OnInit {
     },
     {
       color: '',
-      image: 'assets/images/others/dish.png',
-      name: 'Tallarin palo alto',
+      image: 'assets/images/others/dish2.png',
+      name: 'papita a la huancaina',
       quantity: 1,
-      price: '65.0',
+      price: '25.0',
       currency: 'S/',
-      notes: ['sin aji']
+      notes: ['para llevar']
     },
     {
       color: '',
-      image: 'assets/images/others/dish.png',
-      name: 'Tallarin palo alto',
-      quantity: 1,
-      price: '65.0',
-      currency: 'S/',
-      notes: ['sin aji']
-    },
-    {
-      color: '',
-      image: 'assets/images/others/dish.png',
+      image: 'assets/images/others/dish3.png',
       name: 'Tallarin palo alto',
       quantity: 1,
       price: '65.0',
