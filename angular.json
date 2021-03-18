@@ -28,10 +28,7 @@
                 "output": "/assets/"
               }
             ],
-            "styles": ["src/styles.scss"] ,
-            "scripts": [
-              "src/assets/lib/hljs/highlight.pack.js"
-            ]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {

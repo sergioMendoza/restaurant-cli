@@ -87,10 +87,6 @@
 /*****************/
 /***** Apps *****/
 /***************/
-@import 'apps/chat.scss';
-@import 'apps/file-manager.scss';
-@import 'apps/mail.scss';
-@import 'apps/e-commerce.scss';
 @import 'apps/pos.scss';
 @import 'apps/product.scss';
 
@@ -98,17 +94,8 @@
 /*** Plugins ****/
 /***************/
 @import 'plugins/chartist.scss';
-@import 'plugins/quill.scss';
-
 /*******************/
 /*** Utilities ****/
 /*****************/
 @import 'utilities/utilities-bs.scss';
 @import 'utilities/utilities-enlink.scss';
-
-
-/*******************/
-/****** Demo ******/
-/*****************/
-
-@import 'demo/demo';
