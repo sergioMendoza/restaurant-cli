@@ -32,14 +32,15 @@
                 <thead>
                   <tr>
                     <th>Lista de categorias</th>
-                    <th></th>
+                    <th><label nz-checkbox
+                      (ngModelChange)="requiredChange($event)">inactivos</label></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let data of basicTable.data">
                     <td>{{ data.name }}</td>
                     <td>
-                      <a><button nz-button><i nz-icon nzType="edit"></i></button></a>
+                      <a><button class="float-right" nz-button><i nz-icon nzType="edit"></i></button></a>
                     </td>
                   </tr>
                 </tbody>
