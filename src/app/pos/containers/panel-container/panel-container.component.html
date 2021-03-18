@@ -1,42 +1,32 @@
 <div class="pos row">
   <div class="pos-container-prod col-lg-8">
     <div class="pos-header col-lg-12 p-t-15">
-      <div class="d-md-flex align-items-md-center justify-content-between">
-        <div class="media m-v-10 align-items-center">
-          <nz-avatar nzIcon="user" nzSrc="assets/images/avatars/thumb-3.jpg"></nz-avatar>
-          <div class="media-body m-l-15">
-            <h4 class="m-b-0">Maria Panchita</h4>
-            <span class="text-gray">Martes 09, Feb 2021</span>
+      <div class="row">
+        <div class="row col-lg-4">
+          <i class="col-lg-2" nz-icon nzType="field-time" nzTheme="outline"></i>
+          <div class="col-lg-8">
+            <h4 class="p-0 m-0">60 min.</h4>
+            <span class=" font-size-12 text-gray">ocupado</span>
           </div>
         </div>
-
-        <div class="d-md-flex align-items-center d-none">
-          <div class="media align-items-center m-r-20 m-v-5">
-            <i nz-icon nzType="field-time" nzTheme="outline"></i>
-            <div class="d-flex align-items-center m-l-10">
-              <h4 class="m-b-0 m-r-5">60 min.</h4>
-              <span class=" font-size-12 text-gray">ocupado</span>
-            </div>
+        <div class="row col-lg-4">
+          <i class="col-lg-2" nz-icon nzType="unordered-list" nzTheme="outline"></i>
+          <div class="col-lg-8">
+            <h4 class="p-0 m-0">1</h4>
+            <span class="font-size-12 text-gray">pedidos</span>
           </div>
-          <div class="media align-items-center m-r-20 m-v-5">
-            <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
-            <div class="d-flex align-items-center m-l-10">
-              <h4 class="m-b-0 m-r-5">1</h4>
-              <span class="font-size-12 text-gray">pedidos</span>
-            </div>
-          </div>
-          <div class="media align-items-center m-r-20 m-v-5">
-            <i nz-icon nzType="calculator" nzTheme="outline"></i>
-            <div class="d-flex align-items-center m-l-10">
-              <h2 class="m-b-0 m-r-5">S/60</h2>
-              <span class="font-size-12 text-gray">por pagar</span>
-            </div>
+        </div>
+        <div class="row col-lg-4">
+          <i class="col-lg-2" nz-icon nzType="calculator" nzTheme="outline"></i>
+          <div class="col-lg-8">
+            <h4 class="p-0 m-0">S/60</h4>
+            <span class="font-size-12 text-gray">por pagar</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-lg-12">
+    <div class="col-lg-12 p-t-15">
       <nz-divider nzPlain nzText="Toma de Pedidos" nzOrientation="center"></nz-divider>
       <nz-input-group [nzSuffix]="suffixIconSearch">
         <input type="text" nz-input placeholder="Buscar producto" />

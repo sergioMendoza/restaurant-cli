@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
-import { CustomerFormComponent } from 'src/app/customers/components/customer-form/customer-form.component';
+import { CustomerFormComponent } from 'src/app/customer/components/customer-form/customer-form.component';
 import { NoteContainerComponent } from '../note-container/note-container.component';
 import { PaymentContainerComponent } from '../payment-container/payment-container.component';
 

@@ -55,6 +55,7 @@ export class CommonLayoutComponent implements OnInit {
       distinctUntilChanged(),
       map((data) => this.buildBreadCrumb(this.activatedRoute.root))
     );
+
     this.themeService.isMenuFoldedChanges.subscribe(
       (isFolded) => (this.isFolded = isFolded)
     );
@@ -76,20 +77,18 @@ export class CommonLayoutComponent implements OnInit {
   ): IBreadcrumb[] {
     let label = '';
     let path = '/';
-
     if (route.routeConfig) {
       if (route.routeConfig.data) {
         label = route.routeConfig.data.title;
         path += route.routeConfig.path;
       }
     } else {
-      label = 'Dashboard';
+      label = 'Inicio';
       path += 'dashboard';
     }
 
     const nextUrl = path && path !== '/dashboard' ? `${url}${path}` : url;
-    const breadcrumb = { label,  url: nextUrl };
-
+    const breadcrumb = { label, url: nextUrl } as IBreadcrumb;
     const newBreadcrumbs = label
       ? [...breadcrumbs, breadcrumb]
       : [...breadcrumbs];

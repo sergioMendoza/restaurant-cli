@@ -1,0 +1,19 @@
+.product-app{
+  .product-header{
+    //border: 1px solid $brand-primary;
+  }
+  .product-container{
+    border: 1px solid $border-color;
+    background-color: $white;
+    min-height: calc(100vh - 70px);
+    border-radius: 5px;
+
+    .category-form-container{
+      border: 1px solid red;
+      width: calc(100% - 10px);
+      height: calc(100vh - 150px);
+      overflow-y: scroll;
+
+    }
+  }
+}

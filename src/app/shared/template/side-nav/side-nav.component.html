@@ -1,8 +1,14 @@
-<perfect-scrollbar class="side-nav">
-
-  <ul nz-menu nzMode="inline" nzTheme="default" [nzInlineCollapsed]="isFolded">
-    <li nz-menu-item nz-tooltip nzTooltipPlacement="right">
+<div class="side-nav-toggle">
+  <ul>
+    <li>
+      <a (click)="toggleFold()">
+        <i nz-icon [nzType]="isFolded? 'menu-unfold':'menu-fold'" theme="outline"></i>
+      </a>
     </li>
+  </ul>
+</div>
+<perfect-scrollbar class="side-nav">
+  <ul nz-menu nzMode="inline" nzTheme="default" [nzInlineCollapsed]="isFolded">
     <ng-container *ngFor="let item of menuItems; let i = index">
       <li nz-menu-item routerLinkActive="ant-menu-item-selected" [routerLinkActiveOptions]="{exact:
         true}" nz-tooltip nzTooltipPlacement="right" *ngIf="item.submenu.length === 0">
@@ -25,16 +31,23 @@
           </ng-container>
         </ul>
       </li>
-
     </ng-container>
   </ul>
-  <div class="side-nav-toggle">
-    <ul class="nav-left">
-      <li class="desktop-toggle">
-        <a (click)="toggleFold()">
-          <i nz-icon [nzType]="isFolded? 'menu-unfold':'menu-fold'" theme="outline"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
 </perfect-scrollbar>
+<div class="row m-0 p-0 side-nav-user">
+  <div class="side-nav-avatar">
+
+      <div class="avatar-img">
+        <nz-avatar [nzSize]="30" nzIcon="user" nzSrc="assets/images/avatars/thumb-3.jpg"></nz-avatar>
+      </div>
+      <div class="avatar-detail">
+        <h6 class="m-0">Maria Panchita</h6>
+        <span class="font-size-11">Sucursal: Miraflores</span>
+      </div>
+
+
+  </div>
+  <div class="side-nav-settings">
+    <i nz-icon nzType="setting" nzTheme="outline"></i>
+  </div>
+</div>

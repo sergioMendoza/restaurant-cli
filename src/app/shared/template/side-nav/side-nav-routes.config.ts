@@ -32,7 +32,7 @@ export const ROUTES: SideNavInterface[] = [
     title: 'CAJA',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: 'money-collect',
+    icon: 'desktop',
     submenu: [
       {
         path: '/pos/panel',
@@ -101,37 +101,12 @@ export const ROUTES: SideNavInterface[] = [
     ]
   },
   {
-    path: '/products',
+    path: '/product/panel',
     title: 'PRODUCTOS',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: 'container',
-    submenu: [
-      {
-        path: '',
-        title: 'Platos y bebidas',
-        iconType: '',
-        icon: '',
-        iconTheme: '',
-        submenu: []
-      },
-      {
-        path: '',
-        title: 'Combos',
-        iconType: '',
-        icon: '',
-        iconTheme: '',
-        submenu: []
-      },
-      {
-        path: '',
-        title: 'Insumos',
-        iconType: '',
-        icon: '',
-        iconTheme: '',
-        submenu: []
-      }
-    ]
+    submenu: []
   },
 
 
