@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { PanelContainerComponent } from './containers/panel-container/panel-container.component';
 import { ProductRoutingModule } from './product-routing.module';
@@ -40,6 +41,7 @@ const antdModule = [
   declarations: [PanelContainerComponent],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     ProductRoutingModule,
     ...antdModule

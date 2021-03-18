@@ -44,7 +44,7 @@ export class PanelContainerComponent implements OnInit {
       address: 'Sidney No. 1 Lake Park'
     }
   ];
-
+  selectedValue = '1';
   validateForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}

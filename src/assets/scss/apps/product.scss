@@ -1,19 +1,30 @@
-.product-app{
-  .product-header{
+.product-app {
+  .product-header {
     //border: 1px solid $brand-primary;
   }
-  .product-container{
+  .product-container {
     border: 1px solid $border-color;
     background-color: $white;
     min-height: calc(100vh - 70px);
     border-radius: 5px;
 
-    .category-form-container{
-      border: 1px solid red;
+    .local-select {
+      span {
+        color: #53535f;
+        font-weight: 500;
+        padding: 0 0 8px;
+        line-height: 1.5715;
+        white-space: initial;
+        text-align: left;
+      }
+    }
+
+    .category-form-container {
+      //border: 1px solid red;
       width: calc(100% - 10px);
       height: calc(100vh - 150px);
       overflow-y: scroll;
-
+      border-left: 1px solid $border-color;
     }
   }
 }
