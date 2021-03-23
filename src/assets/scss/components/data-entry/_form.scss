@@ -4,6 +4,12 @@
         color: $body-color;
         font-weight: $font-weight-semibold;
         height: $input-height;
+
+
+    }
+
+    label::after{
+      content: none;
     }
 }
 
@@ -109,7 +115,7 @@
 
 .ant-form-item-has-warning {
 
-    .ant-input, 
+    .ant-input,
     .ant-input-affix-wrapper {
         background-color: $white;
         border-color: $input-warning-color;
@@ -174,7 +180,7 @@
     color: $gray-light;
     line-height: $line-height-base;
     margin-top: 5px;
-}    
+}
 
 .ant-form-item {
     font-size:  $font-size-base;

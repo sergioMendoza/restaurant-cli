@@ -606,6 +606,10 @@ $positions: static, relative, absolute, fixed, sticky;
     color: $text-muted !important;
 }
 
+.text-favorite {
+  color: $gold !important;
+}
+
 .text-link {
 
     &:hover {

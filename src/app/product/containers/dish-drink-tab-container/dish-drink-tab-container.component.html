@@ -1,0 +1,202 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <nz-card>
+
+        <form nzLayout="vertical" nz-form [formGroup]="productFilterForm" (ngSubmit)="submitForm()">
+          <div class="row">
+            <div class="col-md-6">
+              <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzFor="restaurantBranch">Local</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                  <nz-select nzSize="small" formControlName="restaurantBranch">
+                    <nz-option nzLabel="Todos los locales" nzValue="0"></nz-option>
+                    <nz-option nzLabel="Miraflores" nzValue="1"></nz-option>
+                    <nz-option nzLabel="La Molina" nzValue="2"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div class="col-md-6">
+              <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzFor="categoryBranch">Categoria</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                  <nz-select nzSize="small" formControlName="categoryBranch">
+                    <nz-option nzLabel="Todos los locales" nzValue="0"></nz-option>
+                    <nz-option nzLabel="Miraflores" nzValue="1"></nz-option>
+                    <nz-option nzLabel="La Molina" nzValue="2"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div class="col-md-6">
+              <nz-form-item>
+                <nz-input-group [nzSuffix]="suffixIconSearch">
+                  <input nzSize="small" type="text" nz-input placeholder="Buscar producto" />
+                </nz-input-group>
+                <ng-template #suffixIconSearch>
+                  <i nz-icon nzType="search"></i>
+                </ng-template>
+              </nz-form-item>
+            </div>
+            <div class="col-md-6">
+              <nz-form-item>
+                <nz-form-control [nzSpan]="12">
+                  <label nz-checkbox formControlName="activeProduct">activos</label>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+        </form>
+
+        <nz-table nzSize="small" #basicTable [nzData]="listOfData">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Codigo</th>
+              <th>Modificado?</th>
+              <th>Activo?</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td>{{ data.name }}</td>
+              <td>#{{data.key}}</td>
+              <td>{{data.modified}}</td>
+              <td>{{data.active}}</td>
+              <td>
+                <button class="float-left" nz-button><i nz-icon nzType="edit"></i></button>
+                <button class="float-right" nz-button><i nz-icon nzType="eye"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+
+
+      </nz-card>
+    </div>
+    <div class="col-md-6">
+      <nz-card nzTitle="Crear producto">
+        <div class="row">
+          <div class="col-md-12">
+            <form nzLayout="vertical" nz-form [formGroup]="productForm" (ngSubmit)="submitForm()">
+              <div class="row">
+                <div class="col-md-12">
+                  <nz-form-item>
+                    <nz-input-group [nzSuffix]="suffixTemplate">
+                      <input type="text" nz-input placeholder="Nombre del producto" formControlName="name" />
+                    </nz-input-group>
+                    <ng-template #suffixTemplate>
+                      <i (click)="setFavorite()" [ngClass]="{'text-favorite': favorite.value }" nz-icon nzType="star" [nzTheme]="favorite.value ? 'fill' : 'outline'"></i>
+                    </ng-template>
+                  </nz-form-item>
+                </div>
+                <div class="col-md-12">
+                  <nz-form-item>
+                    <nz-radio-group class="row m-0" formControlName="modified" nzButtonStyle="solid">
+                      <label class="col-md-6" nz-radio-button [nzValue]="true">Modificado</label>
+                      <label class="col-md-6" nz-radio-button [nzValue]="false">No modificado</label>
+                    </nz-radio-group>
+                  </nz-form-item>
+                </div>
+
+                <div class="col-md-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="24" nzFor="key">Codigo de marca</nz-form-label>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="">
+                      <input nzSize="small" type="text" nz-input formControlName="key"
+                        placeholder="Código de marca del producto" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div class="col-md-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="24" nzFor="category">Categoría</nz-form-label>
+                    <nz-form-control [nzSpan]="24">
+                      <nz-select nzSize="small" formControlName="category">
+                        <nz-option nzLabel="" nzValue="0"></nz-option>
+                        <nz-option nzLabel="" nzValue="1"></nz-option>
+                        <nz-option nzLabel="" nzValue="2"></nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div class="col-md-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="24" nzFor="category">Área de producción</nz-form-label>
+                    <nz-form-control [nzSpan]="24">
+                      <nz-select nzSize="small" formControlName="category">
+                        <nz-option nzLabel="" nzValue="0"></nz-option>
+                        <nz-option nzLabel="" nzValue="1"></nz-option>
+                        <nz-option nzLabel="" nzValue="2"></nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div class="col-md-6">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="24" nzFor="category">Almacén</nz-form-label>
+                    <nz-form-control [nzSpan]="24">
+                      <nz-select nzSize="small" formControlName="category">
+                        <nz-option nzLabel="" nzValue="0"></nz-option>
+                        <nz-option nzLabel="" nzValue="1"></nz-option>
+                        <nz-option nzLabel="" nzValue="2"></nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div class="col-md-12">
+                  <nz-form-item>
+                    <nz-form-label [nzSpan]="24" nzFor="key">Descripción</nz-form-label>
+                    <nz-form-control>
+                      <nz-textarea-count [nzMaxCharacterCount]="100">
+                        <textarea rows="2" formControlName="description" nz-input></textarea>
+                      </nz-textarea-count>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+                <div class="col-md-12">
+                  <nz-form-item>
+                    <nz-form-control [nzSpan]="24">
+                      <label nz-checkbox formControlName="">Este producto es inafecto a impuestos?</label>
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-control [nzSpan]="24">
+                      <label nz-checkbox formControlName="">Este producto es exonerado a impuestos?</label>
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-control [nzSpan]="24">
+                      <label nz-checkbox formControlName="">Esta afecto a una ley del pais?</label>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+
+
+
+                <div class="col-md-12 text-center">
+                  <button nz-button nzType="primary">Crear producto</button>
+                </div>
+
+              </div>
+
+
+
+
+            </form>
+          </div>
+
+        </div>
+      </nz-card>
+    </div>
+  </div>
+</div>

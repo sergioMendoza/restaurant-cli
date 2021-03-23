@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
-import { PanelContainerComponent } from './containers/panel-container/panel-container.component';
 import { ProductRoutingModule } from './product-routing.module';
 
 /** Import any ng-zorro components as the module required except icon module */
@@ -20,7 +19,18 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+
+// containers
+import { PanelContainerComponent } from './containers/panel-container/panel-container.component';
+import { CategoryTabContainerComponent } from './containers/category-tab-container/category-tab-container.component';
+import { DishDrinkTabContainerComponent } from './containers/dish-drink-tab-container/dish-drink-tab-container.component';
+import { ComboTabContainerComponent } from './containers/combo-tab-container/combo-tab-container.component';
+import { MenuTabContainerComponent } from './containers/menu-tab-container/menu-tab-container.component';
+import { SuppliesTabContainerComponent } from './containers/supplies-tab-container/supplies-tab-container.component';
 /** Assign all ng-zorro modules to this array*/
+
 const antdModule = [
   NzButtonModule,
   NzAvatarModule,
@@ -34,11 +44,20 @@ const antdModule = [
   NzMenuModule,
   NzFormModule,
   NzCheckboxModule,
-  NzTableModule
+  NzTableModule,
+  NzCardModule,
+  NzRadioModule
 ];
 
 @NgModule({
-  declarations: [PanelContainerComponent],
+  declarations: [
+    PanelContainerComponent,
+    CategoryTabContainerComponent,
+    DishDrinkTabContainerComponent,
+    ComboTabContainerComponent,
+    MenuTabContainerComponent,
+    SuppliesTabContainerComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
