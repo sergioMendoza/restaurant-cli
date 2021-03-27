@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <nz-card>
+      <nz-card nzTitle="Platos y bebidas">
 
         <form nzLayout="vertical" nz-form [formGroup]="productFilterForm" (ngSubmit)="submitForm()">
           <div class="row">
@@ -77,8 +77,8 @@
       </nz-card>
     </div>
     <div class="col-md-6">
-      <nz-card nzTitle="Crear producto">
-        <div class="row">
+      <nz-card [nzTitle]="showProductForm ? 'Crear producto': ''" [nzExtra]="createProduct">
+        <div *ngIf="showProductForm" class="row">
           <div class="col-md-12">
             <form nzLayout="vertical" nz-form [formGroup]="productForm" (ngSubmit)="submitForm()">
               <div class="row">
@@ -88,7 +88,8 @@
                       <input type="text" nz-input placeholder="Nombre del producto" formControlName="name" />
                     </nz-input-group>
                     <ng-template #suffixTemplate>
-                      <i (click)="setFavorite()" [ngClass]="{'text-favorite': favorite.value }" nz-icon nzType="star" [nzTheme]="favorite.value ? 'fill' : 'outline'"></i>
+                      <i (click)="setFavorite()" [ngClass]="{'text-favorite': favorite.value }" nz-icon nzType="star"
+                        [nzTheme]="favorite.value ? 'fill' : 'outline'"></i>
                     </ng-template>
                   </nz-form-item>
                 </div>
@@ -181,22 +182,93 @@
                   </nz-form-item>
                 </div>
 
-
-
                 <div class="col-md-12 text-center">
-                  <button nz-button nzType="primary">Crear producto</button>
+                  <button nz-button nzType="primary"><i nz-icon nzType="save" nzTheme="outline"></i> Crear producto</button>
                 </div>
-
               </div>
-
-
-
-
             </form>
           </div>
 
         </div>
       </nz-card>
+      <ng-template #createProduct>
+        <button *ngIf="showProductForm"  nzType="primary" class="m-r-5" nz-button (click)="showProductForm = false"><i nz-icon nzType="delete" nzTheme="outline"></i> Cancelar</button>
+        <button *ngIf="!showProductForm" nz-button (click)="showProductForm = true"><i nz-icon nzType="file-add" nzTheme="outline"></i> Crear Producto</button>
+      </ng-template>
+      <nz-card nzTitle="Variaciones del producto" [nzExtra]="createVariation">
+        <nz-tabset [(nzSelectedIndex)]="index" nzType="editable-card" nzHideAdd (nzClose)="closeTab($event)">
+          <nz-tab *ngFor="let tab of tabsVariation; let i = index" [nzClosable]="i > 0" [nzTitle]="tab">
+            <div class="row">
+              <div class="col-md-12">
+                <form nzLayout="vertical" nz-form [formGroup]="productVariationForm" (ngSubmit)="submitForm()">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <nz-form-item>
+                        <nz-form-label [nzSpan]="24" nzFor="name">Nombre</nz-form-label>
+                        <nz-form-control [nzSpan]="24" nzErrorTip="">
+                          <input nzSize="small" type="text" nz-input formControlName="name"
+                            placeholder="Nombre de la variación" />
+                        </nz-form-control>
+                      </nz-form-item>
+                    </div>
+                    <div class="col-md-4">
+                      <nz-form-item>
+                        <nz-form-label [nzSpan]="24" nzFor="sku">SKU</nz-form-label>
+                        <nz-form-control [nzSpan]="24" nzErrorTip="">
+                          <input nzSize="small" type="text" nz-input formControlName="sku"
+                            placeholder="Código SKU" />
+                        </nz-form-control>
+                      </nz-form-item>
+                    </div>
+                    <div class="col-md-6">
+                      <nz-form-item>
+                        <nz-form-label [nzSpan]="24" nzFor="cost">Costo</nz-form-label>
+                        <nz-form-control [nzSpan]="24" nzErrorTip="">
+                          <nz-input-group nzAddOnBefore="S/">
+                            <input nzSize="small" type="text" nz-input formControlName="cost"
+                            placeholder="Costo de la variación" />
+                          </nz-input-group>
+                        </nz-form-control>
+                      </nz-form-item>
+                    </div>
+                    <div class="col-md-6">
+                      <nz-form-item>
+                        <nz-form-label [nzSpan]="24" nzFor="sellPrice">Precio de venta</nz-form-label>
+                        <nz-form-control [nzSpan]="24" nzErrorTip="">
+                            <nz-input-group nzAddOnBefore="S/">
+                              <input nzSize="small" type="text" nz-input formControlName="sellPrice"
+                            placeholder="Precio de venta" />
+                            </nz-input-group>
+                        </nz-form-control>
+                      </nz-form-item>
+                    </div>
+                    <div class="col-md-6">
+                      <nz-form-item>
+                        <nz-form-label [nzSpan]="24" nzFor="commission">Comisión</nz-form-label>
+                        <nz-form-control [nzSpan]="24" nzErrorTip="">
+                            <nz-input-group nzAddOnBefore="S/">
+                              <input nzSize="small" type="text" nz-input formControlName="commission"
+                              placeholder="Comisión de venta" />
+                            </nz-input-group>
+                        </nz-form-control>
+                      </nz-form-item>
+                    </div>
+                    <div class="col-md-12 text-center">
+                      <button nz-button nzType="primary"><i nz-icon nzType="save" nzTheme="outline"></i> Crear variación</button>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+
+            </div>
+
+          </nz-tab>
+        </nz-tabset>
+      </nz-card>
+      <ng-template #createVariation>
+        <button nz-button (click)="newTab()"><i nz-icon nzType="file-add" nzTheme="outline"></i> Nueva variación</button>
+      </ng-template>
     </div>
   </div>
 </div>

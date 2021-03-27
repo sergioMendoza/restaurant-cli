@@ -1,137 +1,138 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-interface Person {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
-
-export interface RestaurantBranch {
-  id: number;
-  name: string;
-}
-
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { Category } from 'src/app/shared/interfaces/category.type';
+import {
+  RestaurantBranch,
+  RestBranchCategory
+} from 'src/app/shared/interfaces/restaurant-branch.type';
 
 @Component({
   selector: 'app-category-tab-container',
   templateUrl: './category-tab-container.component.html'
 })
 export class CategoryTabContainerComponent implements OnInit {
-  tabs = [
+  restBranchesById = [
     {
-      name: 'Categorias',
-      icon: 'apple'
-    },
-    {
-      name: 'Platos y bebidas',
-      icon: 'android'
+      restBranchId: 1
     }
   ];
 
-  listOfData: Person[] = [
+  categories: Category[] = [
     {
-      key: '1',
-      name: 'Pescados y mariscos',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
+      categoryId: 1,
+      categoryName: 'Pescados y mariscos',
+      active: true
     },
     {
-      key: '2',
-      name: 'Bebidas frias',
-      age: 42,
-      address: 'London No. 1 Lake Park'
+      categoryId: 2,
+      categoryName: 'Bebidas frias',
+      active: true
     },
     {
-      key: '3',
-      name: 'Bebidas calientes',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
+      categoryId: 3,
+      categoryName: 'Bebidas calientes',
+      active: true
     }
   ];
-  selectedValue = '1';
-  validateForm!: FormGroup;
 
-  checked = false;
-  loading = false;
-  indeterminate = false;
-  listOfData2: ReadonlyArray<RestaurantBranch> = [];
-  listOfCurrentPageData: ReadonlyArray<RestaurantBranch> = [];
-  setOfCheckedId = new Set<number>();
+  restaurantBranches: RestaurantBranch[] = [
+    {
+      restBranchId: 1,
+      restBranchName: 'Miraflores'
+    },
+    {
+      restBranchId: 2,
+      restBranchName: 'La molina'
+    },
+    {
+      restBranchId: 4,
+      restBranchName: 'San isidro'
+    }
+  ];
+
+  restBranchesMatchCategory: RestBranchCategory[] = [];
+
+  categoryFilterForm: FormGroup;
+
+  categoryForm = this.fb.group({
+    categoryName: ['', Validators.required],
+    familyCode: '',
+    points: '',
+    color: '#ededed',
+    orderNumber: '',
+    isParentCategory: true,
+    delivery: false,
+    selfService: false,
+    active: true,
+    restBranches: this.fb.array([])
+  });
+
+  selectedValue = 1;
+  rbDisable = true;
 
   constructor(private fb: FormBuilder) {}
 
-  submitForm(): void {
-    // eslint-disable-next-line guard-for-in
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
+  rbCheckedChange(event) {
+    const { active, index } = event;
+    const control = this.categoryForm.controls.restBranches as FormArray;
+    const branchId = this.restBranchesMatchCategory[index].restBranchId;
+
+    this.restBranchesMatchCategory[index].active = active;
+
+    if (active) {
+      const localRestBranch = this.fb.group({
+        restBranchId: branchId
+      });
+      control.push(localRestBranch);
+    } else {
+      control.removeAt(
+        control.value.findIndex((branch) => branch.restBranchId === branchId)
+      );
     }
   }
 
-  requiredChange(required: boolean): void {
+  parentCategoryRequired(required: boolean): void {
     if (!required) {
-      this.validateForm.get('parentCategory')?.clearValidators();
-      this.validateForm.get('parentCategory')?.markAsPristine();
+      this.categoryForm.addControl(
+        'parentCategory',
+        this.fb.group({
+          categoryId: [Validators.required]
+        })
+      );
+      this.categoryForm.controls.parentCategory
+        .get('categoryId')
+        .setValidators([Validators.required]);
+      this.categoryForm.controls.parentCategory.markAllAsTouched();
+      this.categoryForm.controls.parentCategory
+        .get('categoryId')
+        .updateValueAndValidity();
     } else {
-      this.validateForm
-        .get('parentCategory')
-        ?.setValidators(Validators.required);
-      this.validateForm.get('parentCategory')?.markAsDirty();
+      this.categoryForm.removeControl('parentCategory');
     }
-    this.validateForm.get('parentCategory')?.updateValueAndValidity();
+  }
+
+  onSubmit() {
+    if(this.categoryForm.valid){
+      console.log('from container:', this.categoryForm.value);
+    }
+
+  }
+
+  mapRestaurantBranches() {
+    this.restaurantBranches.forEach((branch) => {
+      this.restBranchesMatchCategory.push({ ...branch, active: false });
+    });
   }
 
   ngOnInit(): void {
-
-    console.log(`I will init when tab active`);
-
-
-    this.validateForm = this.fb.group({
-      name: [null, [Validators.required]],
-      fcode: [null],
-      points: [null],
-      color: [null],
-      orderNumber: [null],
-      isSubCategory: [false],
-      parentCategory: [null],
-      delivery: [false],
-      selfService: [false],
-      active: [true]
-    });
-
-    this.listOfData2 = new Array(5).fill(0).map((_, index) => ({
-        id: index,
-        name: `Local ${index}`
-            }));
-  }
-  updateCheckedSet(id: number, checked: boolean): void {
-    if (checked) {
-      this.setOfCheckedId.add(id);
-    } else {
-      this.setOfCheckedId.delete(id);
-    }
-  }
-
-  onCurrentPageDataChange(listOfCurrentPageData: ReadonlyArray<RestaurantBranch>): void {
-    this.listOfCurrentPageData = listOfCurrentPageData;
-    this.refreshCheckedStatus();
-  }
-
-  refreshCheckedStatus(): void {
-  }
-
-  onItemChecked(id: number, checked: boolean): void {
-    this.updateCheckedSet(id, checked);
-    this.refreshCheckedStatus();
-  }
-
-  onAllChecked(checked: boolean): void {
-     this.refreshCheckedStatus();
-  }
-
-  sendRequest(): void {
-    this.loading = true;
+    this.mapRestaurantBranches();
+    this.categoryForm.disable();
+    //console.log('CategoryForm', this.categoryForm.value);
   }
 }

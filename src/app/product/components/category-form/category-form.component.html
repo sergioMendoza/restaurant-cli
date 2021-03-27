@@ -1,0 +1,111 @@
+<form nzLayout="vertical" nz-form [formGroup]="parent" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzRequired nzFor="categoryName">Nombre</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzErrorTip="Ingrese nombre de categoría">
+          <input nzSize="small" type="text" nz-input formControlName="categoryName" placeholder="Nombre de categoría" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="familyCode">
+          Código de familia</nz-form-label>
+        <nz-form-control [nzSpan]="24">
+          <input nzSize="small" type="text" nz-input formControlName="familyCode" placeholder="Código de familia" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="orderNumber">Número de orden</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="">
+          <input nzSize="small" type="number" nz-input formControlName="orderNumber" placeholder="Número de orden" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="points">
+          Puntos</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nzSize="small" type="number" nz-input formControlName="points" placeholder="Puntos" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="color">Color</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nzSize="medium" type="color" nz-input formControlName="color" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+    </div>
+
+    <div class="col-md-6">
+
+      <nz-form-item *ngIf="!isParentCategory" formGroupName="parentCategory">
+        <nz-form-label [nzSpan]="24" nzRequired nzFor="categoryId">
+          Categoría principal</nz-form-label>
+        <nz-form-control [nzSpan]="24" nzErrorTip="Seleccione una categoría principal">
+          <nz-select nzSize="small" formControlName="categoryId">
+            <nz-option *ngFor="let cat of parentCategories; let i = index" [nzLabel]="cat.categoryName"
+              [nzValue]="cat.categoryId">
+            </nz-option>
+
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24">
+          <label nz-checkbox formControlName="isParentCategory" (ngModelChange)="onParentCategoryRequired($event)">
+            Es categoría principal?
+          </label>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24">
+          <label nz-checkbox formControlName="delivery">Delivery?</label>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24">
+          <label nz-checkbox formControlName="selfService">Self Service?</label>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24">
+          <label nz-checkbox formControlName="active">Activo</label>
+        </nz-form-control>
+      </nz-form-item>
+
+      <h6 class="font-size-14">Mostrar en locales</h6>
+      <span class="text-gray">Seleccione los locales en los que la categoria se mostrará.</span>
+
+
+      <nz-table class="m-t-15" nzBordered nzSize="small" #restBranches [nzData]="restaurantBranches">
+        <thead>
+          <tr>
+            <th>Lista de locales</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let branch of restBranches.data; let i = index">
+            <td>{{ branch.restBranchName }}</td>
+            <td [nzDisabled]="rbDisable" [nzChecked]="branch.active" (nzCheckedChange)="rbOnCheckedChange($event, i)"></td>
+          </tr>
+        </tbody>
+      </nz-table>
+
+    </div>
+
+    <div class="col-md-12 text-center">
+      <button nz-button type="submit" nzType="primary">Crear categoria</button>
+    </div>
+
+  </div>
+</form>

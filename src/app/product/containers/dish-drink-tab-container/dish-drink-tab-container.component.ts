@@ -62,6 +62,7 @@ export class DishDrinkTabContainerComponent implements OnInit {
   validateForm!: FormGroup;
   productFilterForm!: FormGroup;
   productForm!: FormGroup;
+  productVariationForm!: FormGroup;
 
   checked = false;
   loading = false;
@@ -71,7 +72,22 @@ export class DishDrinkTabContainerComponent implements OnInit {
   listOfCurrentPmodifiedData: ReadonlyArray<RestaurantBranch> = [];
   setOfCheckedId = new Set<number>();
 
+  index = 0;
+  tabsVariation = ['Principal'];
+  showProductForm = false;
+
+
+
   constructor(private fb: FormBuilder) {}
+
+  closeTab({ index }: { index: number }): void {
+    this.tabsVariation.splice(index, 1);
+  }
+
+  newTab(): void {
+    this.tabsVariation.push('Nueva');
+    this.index = this.tabsVariation.length - 1;
+  }
 
   submitForm(): void {
     // eslint-disable-next-line guard-for-in
@@ -126,6 +142,17 @@ export class DishDrinkTabContainerComponent implements OnInit {
       active: [true],
 
     });
+
+    this.productVariationForm = this.fb.group({
+      id: [null],
+      name: [null],
+      sku: [null],
+      cost: [null],
+      sellPrice: [null],
+      commission: [null]
+    });
+
+
 
     this.listOfData2 = new Array(5).fill(0).map((_, index) => ({
       id: index,

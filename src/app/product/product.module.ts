@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ProductRoutingModule } from './product-routing.module';
 
@@ -29,8 +28,12 @@ import { DishDrinkTabContainerComponent } from './containers/dish-drink-tab-cont
 import { ComboTabContainerComponent } from './containers/combo-tab-container/combo-tab-container.component';
 import { MenuTabContainerComponent } from './containers/menu-tab-container/menu-tab-container.component';
 import { SuppliesTabContainerComponent } from './containers/supplies-tab-container/supplies-tab-container.component';
-/** Assign all ng-zorro modules to this array*/
 
+// components
+import { CategoryFormComponent } from './components/category-form/category-form.component';
+
+
+/** Assign all ng-zorro modules to this array*/
 const antdModule = [
   NzButtonModule,
   NzAvatarModule,
@@ -56,7 +59,8 @@ const antdModule = [
     DishDrinkTabContainerComponent,
     ComboTabContainerComponent,
     MenuTabContainerComponent,
-    SuppliesTabContainerComponent
+    SuppliesTabContainerComponent,
+    CategoryFormComponent
   ],
   imports: [
     CommonModule,

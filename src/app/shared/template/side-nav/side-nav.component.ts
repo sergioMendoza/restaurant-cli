@@ -21,7 +21,7 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
-    console.log(this.menuItems);
+    //console.log(this.menuItems);
     this.themeService.isMenuFoldedChanges.subscribe(
       (isFolded) => (this.isFolded = isFolded)
     );

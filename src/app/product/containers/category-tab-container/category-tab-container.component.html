@@ -30,16 +30,16 @@
           </div>
 
           <div class="col-md-12">
-            <nz-table nzSize="small" #basicTable [nzData]="listOfData">
+            <nz-table nzSize="small" #categoriesTable [nzData]="categories">
               <thead>
                 <tr>
                   <th>Lista de categorias</th>
-                  <th><label nz-checkbox (ngModelChange)="requiredChange($event)">inactivos</label></th>
+                  <th><label nz-checkbox>inactivos</label></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let data of basicTable.data">
-                  <td>{{ data.name }}</td>
+                <tr *ngFor="let data of categoriesTable.data">
+                  <td>{{ data.categoryName }}</td>
                   <td>
                     <a><button class="float-right" nz-button><i nz-icon nzType="edit"></i></button></a>
                   </td>
@@ -54,124 +54,10 @@
       <nz-card nzTitle="Crear categoria">
         <div class="row">
           <div class="col-md-12">
-            <form nzLayout="vertical" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-              <div class="row">
-                <div class="col-md-6">
-                  <nz-form-item>
-                    <nz-form-label [nzSpan]="24" nzRequired nzFor="name">Nombre</nz-form-label>
-                    <nz-form-control [nzSpan]="24" nzErrorTip="Please input your name">
-                      <input nzSize="small" type="text" nz-input formControlName="name"
-                        placeholder="" />
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <nz-form-item>
-                    <nz-form-label [nzSpan]="24" nzFor="fcode">
-                      Codigo familia</nz-form-label>
-                    <nz-form-control [nzSpan]="24">
-                      <input nzSize="small" type="text" nz-input formControlName="fcode" placeholder="" />
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <nz-form-item>
-                    <nz-form-label [nzSpan]="24" nzFor="points">
-                      Puntos</nz-form-label>
-                    <nz-form-control [nzSpan]="24">
-                      <input nzSize="small" type="text" nz-input formControlName="points" placeholder="" />
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <nz-form-item>
-                    <nz-form-label [nzSpan]="24" nzFor="color">Color</nz-form-label>
-                    <nz-form-control [nzSpan]="12">
-                      <input nzSize="medium" type="color" nz-input formControlName="color" placeholder="" />
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <nz-form-item>
-                    <nz-form-label [nzSpan]="24" nzFor="orderNumber"
-                      [nzRequired]="validateForm.get('required')?.value">
-                      Número de orden</nz-form-label>
-                    <nz-form-control [nzSpan]="12" nzErrorTip="Please input your nickname">
-                      <input nzSize="small" type="number" nz-input formControlName="orderNumber" placeholder="" />
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-
-                <div class="col-md-6">
-
-                  <nz-form-item *ngIf="validateForm.get('isSubCategory')?.value">
-                    <nz-form-label [nzSpan]="24" nzFor="parentCategory"
-                      [nzRequired]="validateForm.get('parentCategory')?.value">
-                      Categoria superior</nz-form-label>
-                    <nz-form-control [nzSpan]="24" nzErrorTip="Seleccione una categoria principal">
-                      <nz-select nzSize="small" formControlName="parentCategory">
-                        <nz-option nzLabel="Todos los locales" nzValue="0"></nz-option>
-                        <nz-option nzLabel="Miraflores" nzValue="1"></nz-option>
-                        <nz-option nzLabel="La Molina" nzValue="2"></nz-option>
-                      </nz-select>
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <nz-form-item>
-                    <nz-form-control [nzSpan]="24">
-                      <label nz-checkbox formControlName="isSubCategory" (ngModelChange)="requiredChange($event)">
-                        Es Sub categoria?
-                      </label>
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <nz-form-item>
-                    <nz-form-control [nzSpan]="12">
-                      <label nz-checkbox formControlName="delivery">Delivery?</label>
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <nz-form-item>
-                    <nz-form-control [nzSpan]="12">
-                      <label nz-checkbox formControlName="selfService">Self Service?</label>
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <nz-form-item>
-                    <nz-form-control [nzSpan]="12">
-                      <label nz-checkbox formControlName="active">Activo</label>
-                    </nz-form-control>
-                  </nz-form-item>
-
-                  <h6 class="font-size-14">Mostrar en locales</h6>
-                  <span class="text-gray">Seleccione los locales en los que la categoria se mostrará.</span>
-
-                  <nz-table class="m-t-15" nzBordered nzSize="small" #restaurantBranches [nzData]="listOfData2">
-                    <thead>
-                      <tr>
-                        <th>Lista de locales</th>
-                        <th>Estado</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let data of restaurantBranches.data">
-                        <td>{{ data.name }}</td>
-                        <td [nzChecked]="setOfCheckedId.has(data.id)"  (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
-
-                      </tr>
-                    </tbody>
-                  </nz-table>
-
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <button nz-button nzType="primary">Crear categoria</button>
-                </div>
-
-              </div>
-
-
-
-
-            </form>
+            <app-category-form [parent]="categoryForm" [rbDisable]="rbDisable" [parentCategories]="categories"
+              [restaurantBranches]="restBranchesMatchCategory" (rbCheckedChange)="rbCheckedChange($event)"
+              (checkParentCategory)="parentCategoryRequired($event)"  (catSubmit)="onSubmit()"></app-category-form>
           </div>
-
         </div>
       </nz-card>
     </div>
