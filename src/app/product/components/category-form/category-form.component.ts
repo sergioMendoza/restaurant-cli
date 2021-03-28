@@ -3,7 +3,7 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Category } from 'src/app/shared/interfaces/category.type';
-import { RestBranchCategory } from 'src/app/shared/interfaces/restaurant-branch.type';
+import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.type';
 
 @Component({
   selector: 'app-category-form',
@@ -14,13 +14,16 @@ export class CategoryFormComponent implements OnInit {
   parent: FormGroup;
 
   @Input()
-  restaurantBranches: RestBranchCategory[];
+  restaurantBranches: RestaurantBranch[];
 
   @Input()
   parentCategories: Category[];
 
   @Input()
-  rbDisable: boolean;
+  disable: boolean;
+
+  @Input()
+  edit: boolean;
 
   @Output()
   rbCheckedChange = new EventEmitter<any>();

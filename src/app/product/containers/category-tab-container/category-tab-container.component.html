@@ -2,64 +2,28 @@
   <div class="row">
     <div class="col-md-4">
       <nz-card>
-        <div class="row">
-          <div class="col-md-12">
-            <nz-form-item class="row">
-              <div class="col-md-12 p-0 ant-form-item-label text-left">
-                <label>Locales</label>
-              </div>
-              <nz-form-control>
-                <nz-select nzSize="small" [(ngModel)]="selectedValue">
-                  <nz-option nzLabel="Todos los locales" nzValue="0"></nz-option>
-                  <nz-option nzLabel="Miraflores" nzValue="1"></nz-option>
-                  <nz-option nzLabel="La Molina" nzValue="2"></nz-option>
-                </nz-select>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
+        <app-category-list (viewCategory)="viewCategory($event)" [parent]="categoryFilterForm" [categories]="categories"
+          [restaurantBranches]="restaurantBranches"></app-category-list>
 
-          <div class="col-md-12">
-            <nz-form-item>
-              <nz-input-group [nzSuffix]="suffixIconSearch">
-                <input nzSize="small" type="text" nz-input placeholder="Buscar categoria" />
-              </nz-input-group>
-              <ng-template #suffixIconSearch>
-                <i nz-icon nzType="search"></i>
-              </ng-template>
-            </nz-form-item>
-          </div>
-
-          <div class="col-md-12">
-            <nz-table nzSize="small" #categoriesTable [nzData]="categories">
-              <thead>
-                <tr>
-                  <th>Lista de categorias</th>
-                  <th><label nz-checkbox>inactivos</label></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let data of categoriesTable.data">
-                  <td>{{ data.categoryName }}</td>
-                  <td>
-                    <a><button class="float-right" nz-button><i nz-icon nzType="edit"></i></button></a>
-                  </td>
-                </tr>
-              </tbody>
-            </nz-table>
-          </div>
-        </div>
       </nz-card>
     </div>
     <div class="col-md-8">
-      <nz-card nzTitle="Crear categoria">
+      <nz-card [nzTitle]="cardTittle" [nzExtra]="categoryBtn">
         <div class="row">
           <div class="col-md-12">
-            <app-category-form [parent]="categoryForm" [rbDisable]="rbDisable" [parentCategories]="categories"
-              [restaurantBranches]="restBranchesMatchCategory" (rbCheckedChange)="rbCheckedChange($event)"
-              (checkParentCategory)="parentCategoryRequired($event)"  (catSubmit)="onSubmit()"></app-category-form>
+            <app-category-form [parent]="categoryForm" [edit]="edit" [disable]="disable" [parentCategories]="categories"
+              [restaurantBranches]="restaurantBranches" (rbCheckedChange)="rbCheckedChange($event)"
+              (checkParentCategory)="parentCategoryRequired($event)" (catSubmit)="onSubmit()"></app-category-form>
           </div>
         </div>
       </nz-card>
+      <ng-template #categoryBtn>
+        <button class="m-r-5" (click)="editCategory()" *ngIf="disable" nz-button><i nz-icon nzType="edit" nzTheme="outline"></i>
+          Habilitar edición</button>
+        <button (click)="newCategory()" *ngIf="disable || edit" nz-button nzType="primary"><i nz-icon nzType="file-add" nzTheme="outline"></i>
+          nueva categoría</button>
+
+      </ng-template>
     </div>
   </div>
 </div>

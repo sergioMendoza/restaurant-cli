@@ -1,10 +1,6 @@
 export interface RestaurantBranch{
   restBranchId: number;
   restBranchName: string;
+  activeCategory?: boolean;
 }
 
-export interface RestBranchCategory{
-  restBranchId: number;
-  restBranchName: string;
-  active: boolean;
-}

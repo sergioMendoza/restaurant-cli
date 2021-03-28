@@ -17,13 +17,6 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSpan]="24" nzFor="orderNumber">Número de orden</nz-form-label>
-        <nz-form-control [nzSpan]="14" nzErrorTip="">
-          <input nzSize="small" type="number" nz-input formControlName="orderNumber" placeholder="Número de orden" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
         <nz-form-label [nzSpan]="24" nzFor="points">
           Puntos</nz-form-label>
         <nz-form-control [nzSpan]="14">
@@ -43,11 +36,11 @@
 
     <div class="col-md-6">
 
-      <nz-form-item *ngIf="!isParentCategory" formGroupName="parentCategory">
+      <nz-form-item *ngIf="!isParentCategory">
         <nz-form-label [nzSpan]="24" nzRequired nzFor="categoryId">
           Categoría principal</nz-form-label>
         <nz-form-control [nzSpan]="24" nzErrorTip="Seleccione una categoría principal">
-          <nz-select nzSize="small" formControlName="categoryId">
+          <nz-select nzSize="small" formControlName="parentCategoryId">
             <nz-option *ngFor="let cat of parentCategories; let i = index" [nzLabel]="cat.categoryName"
               [nzValue]="cat.categoryId">
             </nz-option>
@@ -96,7 +89,8 @@
         <tbody>
           <tr *ngFor="let branch of restBranches.data; let i = index">
             <td>{{ branch.restBranchName }}</td>
-            <td [nzDisabled]="rbDisable" [nzChecked]="branch.active" (nzCheckedChange)="rbOnCheckedChange($event, i)"></td>
+            <td [nzDisabled]="disable" [nzChecked]="branch.activeCategory"
+              (nzCheckedChange)="rbOnCheckedChange($event, i)"></td>
           </tr>
         </tbody>
       </nz-table>
@@ -104,7 +98,19 @@
     </div>
 
     <div class="col-md-12 text-center">
-      <button nz-button type="submit" nzType="primary">Crear categoria</button>
+
+      <button *ngIf="!disable && !edit" [disabled]="!parent.valid" nz-button type="submit" nzType="primary">
+        <i nz-icon nzType="file-add" nzTheme="outline"></i>
+         Crear categoría
+      </button>
+      <button *ngIf="!disable && edit" nz-button type="submit" nzType="primary">
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+        Editar categoría
+      </button>
+      <button  class="m-l-5" *ngIf="edit" nz-button>
+        <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+        Cancelar
+      </button>
     </div>
 
   </div>

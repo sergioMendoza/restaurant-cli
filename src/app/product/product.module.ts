@@ -31,6 +31,7 @@ import { SuppliesTabContainerComponent } from './containers/supplies-tab-contain
 
 // components
 import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
 
 
 /** Assign all ng-zorro modules to this array*/
@@ -60,7 +61,8 @@ const antdModule = [
     ComboTabContainerComponent,
     MenuTabContainerComponent,
     SuppliesTabContainerComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    CategoryListComponent
   ],
   imports: [
     CommonModule,

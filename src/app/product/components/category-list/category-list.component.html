@@ -1,0 +1,57 @@
+<form nzLayout="vertical" nz-form [formGroup]="parent">
+  <div class="row">
+
+    <div class="col-md-12">
+      <nz-form-item class="row" formGroupName="rbSelector">
+        <div class="col-md-12 p-0 ant-form-item-label text-left">
+          <label>Locales</label>
+        </div>
+        <nz-form-control>
+          <nz-select nzSize="small" formControlName="restBranchId">
+            <nz-option  nzLabel="Todos los locales" nzValue="0"></nz-option>
+            <nz-option *ngFor="let branch of restaurantBranches" [nzLabel]="branch.restBranchName"
+              [nzValue]="branch.restBranchId"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="col-md-12">
+      <nz-form-item>
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input nzSize="small" type="text" nz-input placeholder="Buscar categoria" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </nz-form-item>
+    </div>
+    <div class="col-md-12">
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24">
+          <label nz-checkbox (nzCheckedChange)="onCheckedChange($event)" formControlName="inactive">Mostrar
+            inactivos</label>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="col-md-12">
+      <nz-table nzSize="small" #categoriesTable [nzData]="categories">
+        <thead>
+          <tr>
+            <th>Lista de categorías</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of categoriesTable.data; let i = index;">
+            <td>{{ data.categoryName }}</td>
+            <td>
+              <a><button (click)="onViewCategory(i)" class="float-right" nz-button><i nz-icon nzType="eye"></i></button></a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</form>
