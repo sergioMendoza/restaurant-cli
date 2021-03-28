@@ -5,7 +5,7 @@ export interface Category {
   points: number;
   color: string;
   isParentCategory: boolean;
-  parentCategoryId?: number;
+  parentCategoryId: number;
   delivery: boolean;
   selfService: boolean;
   active: boolean;

@@ -1,11 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <nz-card>
+      <nz-card [nzExtra]="createCategoryTemplate">
         <app-category-list (viewCategory)="viewCategory($event)" [parent]="categoryFilterForm" [categories]="categories"
           [restaurantBranches]="restaurantBranches"></app-category-list>
-
       </nz-card>
+      <ng-template #createCategoryTemplate>
+        <button (click)="newCategory()" *ngIf="disable || edit" nz-button nzType="primary"><i nz-icon nzType="file-add" nzTheme="outline"></i>
+          nueva categoría</button>
+      </ng-template>
     </div>
     <div class="col-md-8">
       <nz-card [nzTitle]="cardTittle" [nzExtra]="categoryBtn">
@@ -20,9 +23,6 @@
       <ng-template #categoryBtn>
         <button class="m-r-5" (click)="editCategory()" *ngIf="disable" nz-button><i nz-icon nzType="edit" nzTheme="outline"></i>
           Habilitar edición</button>
-        <button (click)="newCategory()" *ngIf="disable || edit" nz-button nzType="primary"><i nz-icon nzType="file-add" nzTheme="outline"></i>
-          nueva categoría</button>
-
       </ng-template>
     </div>
   </div>
