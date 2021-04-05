@@ -79,34 +79,29 @@ export class CategoryTabContainerComponent implements OnInit {
     inactive: false
   });
 
-  categoryForm: FormGroup;
+  categoryForm = this.fb.group({
+    categoryId: '',
+    categoryName: ['', Validators.required],
+    familyCode: '',
+    points: '',
+    color: '#ededed',
+    isParentCategory: true,
+    parentCategoryId: '',
+    delivery: false,
+    selfService: false,
+    active: true,
+    restBranches: this.fb.array([])
+  });
 
   disable = false;
   edit = false;
   cardTittle = 'Crear categoría';
 
   constructor(private fb: FormBuilder) {
-    this.createCategoryForm();
     this.setActiveCategoryValue([]);
   }
 
   ngOnInit(): void {}
-
-  createCategoryForm(): void {
-    this.categoryForm = this.fb.group({
-      categoryId: '',
-      categoryName: ['', Validators.required],
-      familyCode: '',
-      points: '',
-      color: '#ededed',
-      isParentCategory: true,
-      parentCategoryId: '',
-      delivery: false,
-      selfService: false,
-      active: true,
-      restBranches: this.fb.array([])
-    });
-  }
 
   rbCheckedChange(event) {
     const { active, index } = event;
@@ -152,13 +147,15 @@ export class CategoryTabContainerComponent implements OnInit {
 
   viewCategory(index: number) {
     const category: Category = this.categories[index];
-    console.log(category);
-    const control = this.categoryForm.controls.restBranches as FormArray;
+    const restBranchControl = this.categoryForm.controls
+      .restBranches as FormArray;
     const color: string = category.color === '' ? '#ededed' : category.color;
 
-    this.setActiveCategoryValue(category.restBranches);
     this.cardTittle = 'Mostrar categoría';
     this.disable = true;
+
+    restBranchControl.clear();
+    this.setActiveCategoryValue(category.restBranches);
 
     this.categoryForm.get('categoryId').setValidators([Validators.required]);
     this.categoryForm.get('categoryId').setValue(category.categoryId);
@@ -179,7 +176,7 @@ export class CategoryTabContainerComponent implements OnInit {
       .setValue(category.parentCategoryId);
 
     category.restBranches.forEach((id) => {
-      control.push(
+      restBranchControl.push(
         this.fb.control({
           restBranchId: id
         })
@@ -190,18 +187,23 @@ export class CategoryTabContainerComponent implements OnInit {
     this.categoryForm.markAsPristine();
     this.categoryForm.markAsUntouched();
     this.categoryForm.updateValueAndValidity();
+
+    console.log(this.categoryForm);
   }
 
   editCategory() {
+    this.categoryForm.enable();
     this.disable = false;
     this.edit = true;
     this.cardTittle = 'Editar categoría';
-    this.categoryForm.enable();
+
+    this.categoryForm.markAsPristine();
+    this.categoryForm.markAsUntouched();
+    this.categoryForm.updateValueAndValidity();
   }
 
   newCategory() {
     this.categoryForm.enable();
-    this.createCategoryForm();
     this.setActiveCategoryValue([]);
 
     this.disable = false;
