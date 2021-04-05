@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {
-  FormGroup,
-} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Category } from 'src/app/shared/interfaces/category.type';
 import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.type';
 
