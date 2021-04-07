@@ -8,7 +8,7 @@
         </div>
         <nz-form-control>
           <nz-select nzSize="small" formControlName="restBranchId">
-            <nz-option  nzLabel="Todos los locales" nzValue="0"></nz-option>
+            <nz-option nzLabel="Todos los locales" nzValue="0"></nz-option>
             <nz-option *ngFor="let branch of restaurantBranches" [nzLabel]="branch.restBranchName"
               [nzValue]="branch.restBranchId"></nz-option>
           </nz-select>
@@ -36,7 +36,7 @@
     </div>
 
     <div class="col-md-12">
-      <nz-table nzSize="small" #categoriesTable [nzData]="categories">
+      <nz-table nzSize="small" #categoriesTable [nzData]="categories$">
         <thead>
           <tr>
             <th>Lista de categorías</th>
@@ -47,7 +47,11 @@
           <tr *ngFor="let data of categoriesTable.data; let i = index;">
             <td>{{ data.categoryName }}</td>
             <td>
-              <a><button (click)="onViewCategory(i)" class="float-right" nz-button><i nz-icon nzType="eye"></i></button></a>
+              <a>
+                <button (click)="onViewCategory(i)" class="float-right" nz-button>
+                  <i nz-icon nzType="eye"></i>
+                </button>
+              </a>
             </td>
           </tr>
         </tbody>

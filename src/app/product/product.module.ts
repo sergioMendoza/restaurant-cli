@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { StoreModule } from '@ngrx/store';
 import { ProductRoutingModule } from './product-routing.module';
+
+// Reducers
+import {reducers} from '../store/reducers'
 
 /** Import any ng-zorro components as the module required except icon module */
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -69,6 +72,7 @@ const antdModule = [
     FormsModule,
     ReactiveFormsModule,
     ProductRoutingModule,
+    StoreModule.forFeature('products', reducers),
     ...antdModule
   ]
 })

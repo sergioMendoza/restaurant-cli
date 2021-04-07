@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as fromStore from '../../../store';
 import {
   FormArray,
   FormBuilder,
@@ -14,47 +17,7 @@ import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.ty
   templateUrl: './category-tab-container.component.html'
 })
 export class CategoryTabContainerComponent implements OnInit {
-  categories: Category[] = [
-    {
-      categoryId: 1,
-      categoryName: 'Pescados y mariscos',
-      familyCode: '',
-      points: 0,
-      color: '',
-      isParentCategory: true,
-      parentCategoryId: null,
-      delivery: false,
-      selfService: false,
-      active: true,
-      restBranches: [1, 2, 4]
-    },
-    {
-      categoryId: 2,
-      categoryName: 'Bebidas frias',
-      familyCode: '',
-      points: 0,
-      color: '',
-      isParentCategory: true,
-      parentCategoryId: null,
-      delivery: false,
-      selfService: false,
-      active: true,
-      restBranches: []
-    },
-    {
-      categoryId: 3,
-      categoryName: 'Bebidas calientes',
-      familyCode: '',
-      points: 0,
-      color: '',
-      isParentCategory: false,
-      parentCategoryId: 1,
-      delivery: false,
-      selfService: false,
-      active: true,
-      restBranches: []
-    }
-  ];
+  categories$: Observable<Category[]>;
 
   restaurantBranches: RestaurantBranch[] = [
     {
@@ -85,11 +48,16 @@ export class CategoryTabContainerComponent implements OnInit {
   edit = false;
   cardTittle = 'Crear categoría';
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<fromStore.ProductsState>
+  ) {
     this.createCategoryForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.categories$ = this.store.select<any>(fromStore.getAllCategories);
+  }
 
   createCategoryForm() {
     this.categoryForm = this.fb.group({
@@ -153,7 +121,7 @@ export class CategoryTabContainerComponent implements OnInit {
   }
 
   viewCategory(index: number) {
-    const category: Category = this.categories[index];
+    const category: Category = this.categories$[index];
     const branchControl = this.categoryForm.controls.restBranches as FormArray;
 
     this.cardTittle = 'Mostrar categoría';

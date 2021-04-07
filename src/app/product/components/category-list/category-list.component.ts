@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+
 import { Category } from 'src/app/shared/interfaces/category.type';
 import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.type';
 
@@ -15,7 +17,7 @@ export class CategoryListComponent implements OnInit {
   restaurantBranches: RestaurantBranch[];
 
   @Input()
-  categories: Category[];
+  categories$: Observable<Category[]>;
 
   @Output()
   checkedChange = new EventEmitter<boolean>();
