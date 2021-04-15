@@ -36,7 +36,7 @@
     </div>
 
     <div class="col-md-12">
-      <nz-table nzSize="small" #categoriesTable [nzData]="categories$">
+      <nz-table nzSize="small" #categoriesTable [nzData]="categories$ | async">
         <thead>
           <tr>
             <th>Lista de categorías</th>
@@ -47,10 +47,8 @@
           <tr *ngFor="let data of categoriesTable.data; let i = index;">
             <td>{{ data.categoryName }}</td>
             <td>
-              <a>
-                <button (click)="onViewCategory(i)" class="float-right" nz-button>
-                  <i nz-icon nzType="eye"></i>
-                </button>
+              <a (click)="onViewCategory(data)">
+                <i nz-icon nzType="eye"></i>
               </a>
             </td>
           </tr>

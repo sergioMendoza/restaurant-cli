@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
 import { ProductRoutingModule } from './product-routing.module';
 
 // Reducers
-import {reducers} from '../store/reducers'
+import {reducers, effects} from './store';
 
 /** Import any ng-zorro components as the module required except icon module */
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -35,6 +37,9 @@ import { SuppliesTabContainerComponent } from './containers/supplies-tab-contain
 // components
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+
+//services
+import { CategoryService } from '../shared/services/category.service';
 
 
 /** Assign all ng-zorro modules to this array*/
@@ -73,7 +78,10 @@ const antdModule = [
     ReactiveFormsModule,
     ProductRoutingModule,
     StoreModule.forFeature('products', reducers),
+    EffectsModule.forFeature(effects),
     ...antdModule
-  ]
+  ],
+  providers: [CategoryService],
+
 })
 export class ProductModule {}

@@ -1,39 +1,40 @@
 import {
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector
-} from '@ngrx/store';
-import * as fromCategories from './category.reducer';
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Params
+} from '@angular/router';
+import { createFeatureSelector, ActionReducerMap } from '@ngrx/store';
+import * as fromRouter from '@ngrx/router-store';
 
-export interface ProductsState {
-  categories: fromCategories.CategoryState;
+export interface RouterStateUrl {
+  url: string;
+  queryParams: Params;
+  params: Params;
 }
 
-export const reducers: ActionReducerMap<ProductsState> = {
-  categories: fromCategories.reducer
+export interface State {
+  routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
+}
+
+export const reducers: ActionReducerMap<State> = {
+  routerReducer: fromRouter.routerReducer
 };
 
-export const getProductsState = createFeatureSelector<ProductsState>(
-  'products'
-);
+export const getRouterState = createFeatureSelector<
+  fromRouter.RouterReducerState<RouterStateUrl>
+>('routerReducer');
 
-// category state
-export const getCategoryState = createSelector(
-  getProductsState,
-  (state: ProductsState) => state.categories
-);
+export class CustomSerializer
+  implements fromRouter.RouterStateSerializer<RouterStateUrl> {
+  serialize(routerState: RouterStateSnapshot): RouterStateUrl {
+    const { url } = routerState;
+    const { queryParams } = routerState.root;
 
-export const getAllCategories = createSelector(
-  getCategoryState,
-  fromCategories.getCategories
-);
-
-export const getCategoriesLoaded = createSelector(
-  getCategoryState,
-  fromCategories.getCategoriesLoaded
-);
-
-export const getCategoriesLoading = createSelector(
-  getCategoryState,
-  fromCategories.getCategoriesLoading
-);
+    let state: ActivatedRouteSnapshot = routerState.root;
+    while (state.firstChild) {
+      state = state.firstChild;
+    }
+    const { params } = state;
+    return { url, queryParams, params };
+  }
+}

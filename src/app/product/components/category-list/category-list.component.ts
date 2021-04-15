@@ -23,7 +23,7 @@ export class CategoryListComponent implements OnInit {
   checkedChange = new EventEmitter<boolean>();
 
   @Output()
-  viewCategory = new EventEmitter<number>();
+  viewCategory = new EventEmitter<Category>();
 
   constructor() {}
 
@@ -33,7 +33,7 @@ export class CategoryListComponent implements OnInit {
     this.checkedChange.emit(event);
   }
 
-  onViewCategory(index: number) {
-    this.viewCategory.emit(index);
+  onViewCategory(category: Category) {
+    this.viewCategory.emit(category);
   }
 }

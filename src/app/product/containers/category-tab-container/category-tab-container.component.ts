@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as fromStore from '../../../store';
+import * as fromStore from '../../store';
 import {
   FormArray,
   FormBuilder,
@@ -18,6 +18,8 @@ import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.ty
 })
 export class CategoryTabContainerComponent implements OnInit {
   categories$: Observable<Category[]>;
+
+  selectedCategory$: Observable<Category>;
 
   restaurantBranches: RestaurantBranch[] = [
     {
@@ -56,18 +58,19 @@ export class CategoryTabContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categories$ = this.store.select<any>(fromStore.getAllCategories);
+    this.categories$ = this.store.select(fromStore.getAllCategories);
+    this.store.dispatch(new fromStore.LoadCategories());
   }
 
   createCategoryForm() {
     this.categoryForm = this.fb.group({
-      categoryId: '',
+      id: '',
       categoryName: ['', Validators.required],
       familyCode: '',
       points: '',
       color: '#ededed',
       isParentCategory: true,
-      parentCategoryId: '',
+      parentId: '',
       delivery: false,
       selfService: false,
       active: true,
@@ -100,15 +103,13 @@ export class CategoryTabContainerComponent implements OnInit {
 
   parentCategoryRequired(required: boolean): void {
     if (!required) {
-      this.categoryForm
-        .get('parentCategoryId')
-        .setValidators([Validators.required]);
-      this.categoryForm.get('parentCategoryId').markAsTouched();
-      this.categoryForm.get('parentCategoryId').markAsDirty();
-      this.categoryForm.get('parentCategoryId').updateValueAndValidity();
+      this.categoryForm.get('parentId').setValidators([Validators.required]);
+      this.categoryForm.get('parentId').markAsTouched();
+      this.categoryForm.get('parentId').markAsDirty();
+      this.categoryForm.get('parentId').updateValueAndValidity();
     } else {
-      this.categoryForm.get('parentCategoryId').setValidators([]);
-      this.categoryForm.get('parentCategoryId').setValue(null);
+      this.categoryForm.get('parentId').setValidators([]);
+      this.categoryForm.get('parentId').setValue(null);
     }
   }
 
@@ -120,8 +121,7 @@ export class CategoryTabContainerComponent implements OnInit {
     });
   }
 
-  viewCategory(index: number) {
-    const category: Category = this.categories$[index];
+  setCategory(category: Category) {
     const branchControl = this.categoryForm.controls.restBranches as FormArray;
 
     this.cardTittle = 'Mostrar categoría';
@@ -130,11 +130,11 @@ export class CategoryTabContainerComponent implements OnInit {
     branchControl.clear();
     this.setActiveCategoryValue(category.restBranches);
 
-    this.categoryForm.get('categoryId').setValidators([Validators.required]);
-    this.categoryForm.get('parentCategoryId').setValidators([]);
+    this.categoryForm.get('id').setValidators([Validators.required]);
+    this.categoryForm.get('parentId').setValidators([]);
 
     this.categoryForm.patchValue({
-      categoryId: category.categoryId,
+      id: category.id,
       categoryName: category.categoryName,
       familyCode: category.familyCode,
       points: category.points,
@@ -143,7 +143,7 @@ export class CategoryTabContainerComponent implements OnInit {
       selfService: category.selfService,
       active: category.active,
       isParentCategory: category.isParentCategory,
-      parentCategoryId: category.parentCategoryId
+      parentId: category.parentId
     });
 
     category.restBranches.forEach((id) => {
@@ -173,6 +173,14 @@ export class CategoryTabContainerComponent implements OnInit {
     this.disable = false;
     this.edit = false;
     this.cardTittle = 'Crear categoría';
+  }
+
+  viewCategory(category: Category) {
+    this.selectedCategory$ = this.store.select(fromStore.getselectedCategory);
+    this.store.dispatch(new fromStore.LoadSelectedCategory(category));
+
+
+    console.log(this.selectedCategory$);
   }
 
   onSubmit() {

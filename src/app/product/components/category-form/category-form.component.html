@@ -37,12 +37,12 @@
     <div class="col-md-6">
 
       <nz-form-item *ngIf="!isParentCategory">
-        <nz-form-label [nzSpan]="24" nzRequired nzFor="categoryId">
+        <nz-form-label [nzSpan]="24" nzRequired nzFor="id">
           Categoría principal</nz-form-label>
         <nz-form-control [nzSpan]="24" nzErrorTip="Seleccione una categoría principal">
-          <nz-select nzSize="small" formControlName="parentCategoryId">
+          <nz-select nzSize="small" formControlName="parentId">
             <nz-option *ngFor="let cat of parentCategories; let i = index" [nzLabel]="cat.categoryName"
-              [nzValue]="cat.categoryId">
+              [nzValue]="cat.id">
             </nz-option>
 
           </nz-select>

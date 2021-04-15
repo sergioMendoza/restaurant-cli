@@ -1,11 +1,11 @@
 export interface Category {
-  categoryId: number;
+  id: number;
   categoryName: string;
   familyCode: string;
   points: number;
   color: string;
   isParentCategory: boolean;
-  parentCategoryId: number;
+  parentId: number;
   delivery: boolean;
   selfService: boolean;
   active: boolean;

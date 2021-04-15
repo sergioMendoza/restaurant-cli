@@ -5,6 +5,7 @@ import { Category } from 'src/app/shared/interfaces/category.type';
 export const LOAD_CATEGORIES = '[Categories] Load Categories';
 export const LOAD_CATEGORIES_FAIL = '[Categories] Load Categories Fail';
 export const LOAD_CATEGORIES_SUCCESS = '[Categories] Load Categories Success';
+export const LOAD_SELECTED_CATEGORY = '[Categories] Selected Category';
 
 export class LoadCategories implements Action {
   readonly type = LOAD_CATEGORIES;
@@ -12,7 +13,7 @@ export class LoadCategories implements Action {
 
 export class LoadCategoriesFail implements Action {
   readonly type = LOAD_CATEGORIES_FAIL;
-  constructor(public payload: Category[]) {}
+  constructor(public payload: any) {}
 }
 
 export class LoadCategoriesSuccess implements Action {
@@ -20,5 +21,14 @@ export class LoadCategoriesSuccess implements Action {
   constructor(public payload: Category[]) {}
 }
 
+export class LoadSelectedCategory implements Action {
+  readonly type = LOAD_SELECTED_CATEGORY;
+  constructor(public payload: Category) {}
+}
+
 // Action types
-export type CategoriesAction = LoadCategories | LoadCategoriesFail | LoadCategoriesSuccess;
+export type CategoriesAction =
+  | LoadCategories
+  | LoadCategoriesFail
+  | LoadCategoriesSuccess
+  | LoadSelectedCategory;
