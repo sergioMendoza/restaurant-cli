@@ -15,23 +15,9 @@ export const getCategoryEntities = createSelector(
   fromCategories.getCategoriesEntities
 );
 
-export const getSelectedCategory = createSelector(
-  getCategoryState,
-  fromCategories.getselectedCategory
-);
-
 export const getAllCategories = createSelector(
   getCategoryEntities,
   (entities) => Object.keys(entities).map((id) => entities[parseInt(id, 10)])
-);
-
-export const getselectedCategory = createSelector(
-  getCategoryEntities,
-  getSelectedCategory,
-  (entities, category) => {
-    console.log(entities[category.id]);
-    return entities[category.id];
-  }
 );
 
 export const getCategoriesLoaded = createSelector(

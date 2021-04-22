@@ -10,7 +10,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Category } from 'src/app/shared/interfaces/category.type';
-import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.type';
+import { RestBranch } from 'src/app/shared/interfaces/rest-branch.type';
 
 @Component({
   selector: 'app-category-tab-container',
@@ -19,26 +19,26 @@ import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.ty
 export class CategoryTabContainerComponent implements OnInit {
   categories$: Observable<Category[]>;
 
-  selectedCategory$: Observable<Category>;
+  selectedCategory: Category;
 
-  restaurantBranches: RestaurantBranch[] = [
+  restaurantBranches: RestBranch[] = [
     {
-      restBranchId: 1,
-      restBranchName: 'Miraflores'
+      id: 1,
+      name: 'Miraflores'
     },
     {
-      restBranchId: 2,
-      restBranchName: 'La molina'
+      id: 2,
+      name: 'La molina'
     },
     {
-      restBranchId: 4,
-      restBranchName: 'San isidro'
+      id: 4,
+      name: 'San isidro'
     }
   ];
 
   categoryFilterForm = this.fb.group({
     rbSelector: this.fb.group({
-      restBranchId: 0
+      id: 0
     }),
     searchCategory: '',
     inactive: false
@@ -82,20 +82,20 @@ export class CategoryTabContainerComponent implements OnInit {
   rbCheckedChange(event) {
     const { active, index } = event;
     const control = this.categoryForm.controls.restBranches as FormArray;
-    const branchId = this.restaurantBranches[index].restBranchId;
+    const branchId = this.restaurantBranches[index].id;
 
     this.restaurantBranches[index].activeCategory = active;
 
     if (active) {
       control.push(
         this.fb.control({
-          restBranchId: branchId
+          id: branchId
         })
       );
     } else {
       control.removeAt(
         control.value.findIndex(
-          (branch: RestaurantBranch) => branch.restBranchId === branchId
+          (branch: RestBranch) => branch.id === branchId
         )
       );
     }
@@ -116,7 +116,7 @@ export class CategoryTabContainerComponent implements OnInit {
   setActiveCategoryValue(restBranches: number[]) {
     this.restaurantBranches.map((branch) => {
       branch.activeCategory = restBranches.some(
-        (id) => branch.restBranchId === id
+        (id) => branch.id === id
       );
     });
   }
@@ -149,7 +149,7 @@ export class CategoryTabContainerComponent implements OnInit {
     category.restBranches.forEach((id) => {
       branchControl.push(
         this.fb.control({
-          restBranchId: id
+          id
         })
       );
     });
@@ -176,11 +176,9 @@ export class CategoryTabContainerComponent implements OnInit {
   }
 
   viewCategory(category: Category) {
-    this.selectedCategory$ = this.store.select(fromStore.getselectedCategory);
-    this.store.dispatch(new fromStore.LoadSelectedCategory(category));
-
-
-    console.log(this.selectedCategory$);
+    this.selectedCategory = category;
+    console.log(this.selectedCategory);
+    this.setCategory(this.selectedCategory);
   }
 
   onSubmit() {

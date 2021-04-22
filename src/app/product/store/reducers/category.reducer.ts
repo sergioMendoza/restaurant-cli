@@ -6,12 +6,10 @@ export interface CategoryState {
   entities: { [id: number]: Category };
   loaded: boolean;
   loading: boolean;
-  selectedCategory: Category;
 }
 
 export const initialState: CategoryState = {
   entities: {},
-  selectedCategory: null,
   loaded: false,
   loading: false
 };
@@ -30,7 +28,6 @@ export const reducer = (
     case fromCategories.LOAD_SELECTED_CATEGORY: {
       return {
         ...state,
-        selectedCategory: action.payload,
       };
     }
     case fromCategories.LOAD_CATEGORIES_SUCCESS: {
@@ -65,4 +62,3 @@ export const reducer = (
 export const getCategoriesLoading = (state: CategoryState) => state.loading;
 export const getCategoriesLoaded = (state: CategoryState) => state.loaded;
 export const getCategoriesEntities = (state: CategoryState) => state.entities;
-export const getselectedCategory = (state: CategoryState) => state.selectedCategory;

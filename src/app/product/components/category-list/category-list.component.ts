@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { Category } from 'src/app/shared/interfaces/category.type';
-import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.type';
+import { RestBranch } from 'src/app/shared/interfaces/rest-branch.type';
 
 @Component({
   selector: 'app-category-list',
@@ -14,10 +14,10 @@ export class CategoryListComponent implements OnInit {
   parent: FormGroup;
 
   @Input()
-  restaurantBranches: RestaurantBranch[];
+  restaurantBranches: RestBranch[];
 
   @Input()
-  categories$: Observable<Category[]>;
+  categories: Category[];
 
   @Output()
   checkedChange = new EventEmitter<boolean>();

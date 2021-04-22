@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-4">
       <nz-card [nzExtra]="createCategoryTemplate">
-        <app-category-list (viewCategory)="viewCategory($event)" [parent]="categoryFilterForm" [categories$]="categories$"
+        <app-category-list (viewCategory)="viewCategory($event)" [parent]="categoryFilterForm" [categories]="categories$ | async"
           [restaurantBranches]="restaurantBranches"></app-category-list>
       </nz-card>
       <ng-template #createCategoryTemplate>
@@ -14,7 +14,7 @@
       <nz-card [nzTitle]="cardTittle" [nzExtra]="categoryBtn">
         <div class="row">
           <div class="col-md-12">
-            {{ selectedCategory$ }}
+            {{ selectedCategory | json}}
             <app-category-form [parent]="categoryForm" [edit]="edit" [disable]="disable" [parentCategories]="categories$"
               [restaurantBranches]="restaurantBranches" (rbCheckedChange)="rbCheckedChange($event)"
               (checkParentCategory)="parentCategoryRequired($event)" (catSubmit)="onSubmit()"></app-category-form>

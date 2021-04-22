@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Category } from 'src/app/shared/interfaces/category.type';
-import { RestaurantBranch } from 'src/app/shared/interfaces/restaurant-branch.type';
+import { RestBranch } from 'src/app/shared/interfaces/rest-branch.type';
 
 @Component({
   selector: 'app-category-form',
@@ -12,7 +12,7 @@ export class CategoryFormComponent implements OnInit {
   parent: FormGroup;
 
   @Input()
-  restaurantBranches: RestaurantBranch[];
+  restaurantBranches: RestBranch[];
 
   @Input()
   parentCategories: Category[];
