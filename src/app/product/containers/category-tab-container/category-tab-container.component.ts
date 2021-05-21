@@ -2,13 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromStore from '../../store';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/shared/interfaces/category.type';
 import { RestBranch } from 'src/app/shared/interfaces/rest-branch.type';
 
@@ -94,9 +88,7 @@ export class CategoryTabContainerComponent implements OnInit {
       );
     } else {
       control.removeAt(
-        control.value.findIndex(
-          (branch: RestBranch) => branch.id === branchId
-        )
+        control.value.findIndex((branch: RestBranch) => branch.id === branchId)
       );
     }
   }
@@ -115,9 +107,7 @@ export class CategoryTabContainerComponent implements OnInit {
 
   setActiveCategoryValue(restBranches: number[]) {
     this.restaurantBranches.map((branch) => {
-      branch.activeCategory = restBranches.some(
-        (id) => branch.id === id
-      );
+      branch.activeCategory = restBranches.some((id) => branch.id === id);
     });
   }
 

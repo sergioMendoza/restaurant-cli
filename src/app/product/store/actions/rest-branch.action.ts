@@ -9,12 +9,10 @@ export const LOAD_RESTBRANCH_SUCCESS = '[RestBranch] Load RestBranch Success';
 export class LoadRestBranch implements Action {
   readonly type = LOAD_RESTBRANCH;
 }
-
 export class LoadRestBranchFail implements Action {
   readonly type = LOAD_RESTBRANCH_FAIL;
   constructor(public payload: any) {}
 }
-
 export class LoadRestBranchSuccess implements Action {
   readonly type = LOAD_RESTBRANCH_SUCCESS;
   constructor(public payload: RestBranch[]) {}

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
-    "start": "ng serve --port 4200 -o && yarn json:server",
+    "start": "ng serve --port 4200 -o",
     "json:server": "json-server --watch db.json",
     "build": "ng build",
     "test": "ng test",
